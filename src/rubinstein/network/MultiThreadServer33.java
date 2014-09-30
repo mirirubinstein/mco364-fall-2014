@@ -32,7 +32,7 @@ public class MultiThreadServer33 extends JFrame {
 		try{
 			ServerSocket serverSocket = new ServerSocket(8085);
 			jta.append("Multi Thread server started at " + new Date() + '\n');
-
+			
 			int clientNo = 1;
 			
 			while(true){

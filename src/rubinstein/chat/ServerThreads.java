@@ -21,15 +21,23 @@ public class ServerThreads implements Runnable{
 	
 	public void run(){
 		try{
+		
 		InputStream in = socket.getInputStream();
+		OutputStream out = socket.getOutputStream();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+	
+		
 	
 		String line;
-		while((line = reader.readLine()) != null) {
+		while((line = reader.readLine()) != null){
 			message.append(line);
-		}
-		frame.appendMessage(message.toString());
-		System.out.println(message);
+			frame.appendMessage(message.toString());
+			
+			out.write(line.getBytes());
+			out.flush();
+		
+		}		
 		}catch(IOException ex){
 			System.err.println(ex);
 		}

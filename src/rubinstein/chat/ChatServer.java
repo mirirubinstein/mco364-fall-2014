@@ -9,20 +9,20 @@ import java.net.Socket;
 public class ChatServer {
 	private ChatFrame frame;
 
-	//public static void main(String[] args) {
-	//	new ChatServer();
-	//}
-
 	public ChatServer(ChatFrame frame) {
 		this.frame = frame;
 		try {
 			ServerSocket serverSocket = new ServerSocket(8080);
+			
+			int clientNo = 1;
 			while (true) {
 				Socket socket = serverSocket.accept();
 
 				ServerThreads task = new ServerThreads(socket, frame);
 
 				new Thread(task).start();
+				
+				clientNo++;
 			}
 
 		} catch (IOException e) {
