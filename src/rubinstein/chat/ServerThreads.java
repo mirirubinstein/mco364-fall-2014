@@ -30,7 +30,7 @@ public class ServerThreads implements Runnable{
 		
 	
 		String line;
-		while((line = reader.readLine()) != null){
+		while((line = reader.readLine()) != null){//read line BLOCKS!!!
 			message.append(line);
 			frame.appendMessage(message.toString());
 			
