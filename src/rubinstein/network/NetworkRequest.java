@@ -15,19 +15,19 @@ public class NetworkRequest {
 	
 		//Socket socket = new Socket("www.amazon.com", 80);
 		Socket socket = new Socket("localhost", 8080);
-		InputStream in = socket.getInputStream();//reads information from the socket aka amazon server
+		//InputStream in = socket.getInputStream();//reads information from the socket aka amazon server
 		OutputStream out = socket.getOutputStream();//sends data to the amazon server
 		//String request = "GET /index.html\n\n";
 		String request = "HIIII waasup \n";
 		out.write(request.getBytes());
 		out.flush();//flush the stream so that the data gets sent
-		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+	//	BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		//plain input stream cant read full stream
 		
-		String line;
-		while((line = reader.readLine()) != null) {
-			System.out.println(line + "\n");
-		}
+	//	String line;
+	//	while((line = reader.readLine()) != null) {
+	//		System.out.println(line + "\n");
+	//	}
 		
 	
 	}

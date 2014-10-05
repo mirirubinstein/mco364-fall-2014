@@ -1,41 +1,48 @@
 package rubinstein.chat;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.InputStreamReader;
 import java.net.Socket;
 
-public class ChatClient {
-	private ChatFrame frame;
+public class ChatClient extends ChatFrame {
+
 	private Socket socket;
-	private InputStream in;
-	private OutputStream out;
-	
-	public ChatClient(ChatFrame frame){
-		this.frame = frame;
+	private StringBuilder message;
+
+	public ChatClient() {
+		message = new StringBuilder();
+
 		try {
 			socket = new Socket("localhost", 8080);
-			in = socket.getInputStream();
-			out = socket.getOutputStream();
-			
-		/*	while (true) {
+			setSocket(socket);
 
-				ServerThreads task = new ServerThreads(socket, frame);
+			try {
 
-				new Thread(task).start();
-				
-				
+				InputStream in = socket.getInputStream();
+				BufferedReader reader = new BufferedReader(
+						new InputStreamReader(in));
+
+				String line;
+				while ((line = reader.readLine()) != null) {
+					message.append(line);
+					this.appendMessage(line);
+
+				}
+			} catch (IOException ex) {
+				System.err.println(ex);
 			}
-*/
-			
-			
-		} catch ( IOException e) {
+
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
-	public void sendMessage(String message) throws IOException{
-		out.write(message.getBytes());
+
+	public static void main(String[] args) {
+		ChatFrame c2 = new ChatClient();
+		c2.setLocationRelativeTo(null);
+
 	}
 
 }
