@@ -25,6 +25,7 @@ public class SocketHandler  extends Thread{
 		String line;
 		while((line = reader.readLine()) != null){
 			messages.add(line);
+			System.out.println(line);
 		}
 		
 		} catch (IOException e) {

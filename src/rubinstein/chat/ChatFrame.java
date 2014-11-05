@@ -21,7 +21,7 @@ public class ChatFrame extends JFrame implements ActionListener {
 	private JScrollPane areaScrollPane;
 	private StringBuilder myMessage;
 	private JPanel chatPanel;
-	private JTextField chatBox;
+	private JTextPane chatBox;
 	private JButton sendButton;
 	private Socket socket;
 
@@ -29,7 +29,7 @@ public class ChatFrame extends JFrame implements ActionListener {
 
 		chatPanel = new JPanel();
 		chatPanel.setSize(getWidth(), 100);
-		chatBox = new JTextField();
+		chatBox = new JTextPane();
 		chatBox.setPreferredSize(new Dimension(290, 60));
 		sendButton = new JButton("SEND");
 		sendButton.addActionListener(this);

@@ -15,7 +15,7 @@ public class ChatClient extends ChatFrame {
 		message = new StringBuilder();
 
 		try {
-			socket = new Socket("localhost", 8080);
+			socket = new Socket("192.168.117.107", 3773);
 			setSocket(socket);
 
 			try {
@@ -27,7 +27,7 @@ public class ChatClient extends ChatFrame {
 				String line;
 				while ((line = reader.readLine()) != null) {
 					message.append(line);
-					this.appendMessage(line);
+				//	this.appendMessage(line);
 
 				}
 			} catch (IOException ex) {
