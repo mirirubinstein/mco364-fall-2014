@@ -4,17 +4,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-public class DrawListener implements MouseListener, MouseMotionListener {
+public class DrawListener implements  MouseMotionListener {
 	private Canvas canvas;
 	private int oldX, oldY;
 	public DrawListener(Canvas canvas){
 		this.canvas = canvas;
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e){
-		oldX = e.getX();
-		oldY = e.getY();
 	}
 
 	
@@ -30,32 +24,6 @@ public class DrawListener implements MouseListener, MouseMotionListener {
 		// TODO Auto-generated method stub
 		
 	}
-
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
+
+

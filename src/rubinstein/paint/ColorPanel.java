@@ -30,7 +30,7 @@ public class ColorPanel extends JPanel implements ActionListener{
 		orange = new JButton("Orange");
 		yellow = new JButton("Yellow");	
 		purple = new JButton("Purple");
-		white = new JButton("White");
+		white = new JButton("ERASER");
 		black.addActionListener(this);
 		red.addActionListener(this);
 		blue.addActionListener(this);
