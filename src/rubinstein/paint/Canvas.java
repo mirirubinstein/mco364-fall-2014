@@ -1,12 +1,9 @@
 package rubinstein.paint;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
@@ -25,14 +22,6 @@ public class Canvas extends JComponent {
 	image = new BufferedImage(800,600, BufferedImage.TYPE_INT_ARGB);
 		paintColor = Color.BLACK;
 		
-		addMouseListener(new MouseAdapter(){
-			public void mousePressed(MouseEvent e){
-				oldX = e.getX();
-				oldY = e.getY();
-			}
-		});
-
-		
 	}
 	
 	
@@ -49,7 +38,6 @@ public class Canvas extends JComponent {
 		currentX = x2;
 		currentY = y2;
 		g = (Graphics2D) image.getGraphics();
-		g.setStroke(new BasicStroke(10));
 		g.setColor(paintColor);
 	//	g.fillOval(x2, y2, 10,10);
 		g.drawLine(oldX, oldY, currentX, currentY);
