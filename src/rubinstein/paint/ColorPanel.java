@@ -8,8 +8,27 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class ColorPanel extends JPanel implements ActionListener{
-	private Canvas canvas;
+public class ColorPanel extends JPanel {
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+/*	private Canvas canvas;
 	private JButton black;
 	private JButton red;
 	private JButton blue;
@@ -23,14 +42,22 @@ public class ColorPanel extends JPanel implements ActionListener{
 		this.canvas = canvas;
 		setSize(100,600);
 		setLayout(new GridLayout(4,1));
-		black = new JButton("Black");
-		red = new JButton("Red");
-		blue = new JButton("Blue");
-		green = new JButton("Green");
-		orange = new JButton("Orange");
-		yellow = new JButton("Yellow");	
-		purple = new JButton("Purple");
-		white = new JButton("White");
+		black = new JButton();
+		black.setBackground(Color.BLACK);
+		red = new JButton();
+		red.setBackground(Color.RED);
+		blue = new JButton();
+		blue.setBackground(Color.BLUE);
+		green = new JButton();
+		green.setBackground(Color.GREEN);
+		orange = new JButton();
+		orange.setBackground(Color.ORANGE);
+		yellow = new JButton();	
+		yellow.setBackground(Color.YELLOW);
+		purple = new JButton();
+		purple.setBackground(Color.MAGENTA);
+		white = new JButton();
+		white.setBackground(Color.WHITE);
 		black.addActionListener(this);
 		red.addActionListener(this);
 		blue.addActionListener(this);
@@ -71,6 +98,6 @@ public class ColorPanel extends JPanel implements ActionListener{
 		
 	}
 	
-
+*/
 }
 

@@ -2,5 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/student1/Documents/GitHub/mco364-fall-2014/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/student1/Documents/GitHub/mco364-fall-2014/jetty-all-9.2.4.v20141103.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

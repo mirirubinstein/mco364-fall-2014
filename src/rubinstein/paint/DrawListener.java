@@ -3,18 +3,13 @@ package rubinstein.paint;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelListener;
 
-public class DrawListener implements MouseListener, MouseMotionListener {
+public class DrawListener implements  MouseMotionListener{
 	private Canvas canvas;
 	private int oldX, oldY;
 	public DrawListener(Canvas canvas){
 		this.canvas = canvas;
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e){
-		oldX = e.getX();
-		oldY = e.getY();
 	}
 
 	
@@ -25,37 +20,12 @@ public class DrawListener implements MouseListener, MouseMotionListener {
 		
 	}
 
+
 	@Override
-	public void mouseMoved(MouseEvent e) {
+	public void mouseMoved(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
