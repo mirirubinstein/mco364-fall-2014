@@ -12,52 +12,38 @@ import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
+//this class should have only one responsibility! to draw the image!
 
 public class Canvas extends JComponent {
+	private DrawListener listener;
 	private BrushPanel panel;
-	private int oldX;
-	private int oldY;
-	private int currentX;
-	private int currentY;
 	private int strokeThickness;
 	private Image image;
-	private Graphics2D g;
 	private Color paintColor;
 
 	
 	public Canvas(BrushPanel panel){
 		this.panel = panel;
+		
 	image = new BufferedImage(800,600, BufferedImage.TYPE_INT_ARGB);
 		paintColor = Color.BLACK;
 		strokeThickness = 10;
-		
-		addMouseListener(new MouseAdapter(){
-			public void mousePressed(MouseEvent e){
-				oldX = e.getX();
-				oldY = e.getY();
-			
-			}
-		});
 		
 
 		addMouseWheelListener(new MouseWheelListener() {
             public void mouseWheelMoved(MouseWheelEvent e) {
               
-              int scrolledAmount = -(e.getWheelRotation());
-              if(scrolledAmount < 0){
-            	  strokeThickness = 0;
+              int scrolledAmount = (-e.getWheelRotation());
+              if(-scrolledAmount >= strokeThickness){
+            	  strokeThickness = 1;
               }else{
               strokeThickness += scrolledAmount;
-              
-              
+               
               }
-              g.setStroke(new BasicStroke(strokeThickness));
+           
               repaint();
             }
         });
- 
-		
-		
 		
 	}
 	
@@ -66,25 +52,14 @@ public class Canvas extends JComponent {
 		//super.paintComponent(g);
 	
 		g.drawImage(image,0,0,null);
-		//oldX = x;
-		//oldY = y;
 		panel.setStrokeWidth(strokeThickness);
-		
-	}
-	public void setPoint(int x1, int y1, int x2, int y2){
-		currentX = x2;
-		currentY = y2;
-		g = (Graphics2D) image.getGraphics();
-		g.setStroke(new BasicStroke(strokeThickness));
-		g.setColor(paintColor);
-	//	g.fillOval(x2, y2, 10,10);
-		g.drawLine(oldX, oldY, currentX, currentY);
-		repaint();
-		oldX = currentX;
-		oldY= currentY;
+	
+		// all the listeners will implement this method differently, depending on its shape
+		//listener.drawPreview((Graphics2D) g);
 		
 		
 	}
+	
 	public void setColor(Color color){
 		paintColor = color;
 	}
@@ -94,6 +69,10 @@ public class Canvas extends JComponent {
 	public int getStrokeThickness(){
 		return strokeThickness;
 	}
+	public Image getImage(){
+		return image;
+	}
+	
 
 
 }
