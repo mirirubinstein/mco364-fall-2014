@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JComponent;
 
 public class Canvas extends JComponent {
+	private BrushPanel panel;
 	private int oldX;
 	private int oldY;
 	private int currentX;
@@ -24,7 +25,8 @@ public class Canvas extends JComponent {
 	private Color paintColor;
 
 	
-	public Canvas(){
+	public Canvas(BrushPanel panel){
+		this.panel = panel;
 	image = new BufferedImage(800,600, BufferedImage.TYPE_INT_ARGB);
 		paintColor = Color.BLACK;
 		strokeThickness = 10;
@@ -33,6 +35,7 @@ public class Canvas extends JComponent {
 			public void mousePressed(MouseEvent e){
 				oldX = e.getX();
 				oldY = e.getY();
+			
 			}
 		});
 		
@@ -45,13 +48,16 @@ public class Canvas extends JComponent {
             	  strokeThickness = 0;
               }else{
               strokeThickness += scrolledAmount;
+              
+              
               }
               g.setStroke(new BasicStroke(strokeThickness));
-               
+              repaint();
             }
         });
  
-
+		
+		
 		
 	}
 	
@@ -62,7 +68,7 @@ public class Canvas extends JComponent {
 		g.drawImage(image,0,0,null);
 		//oldX = x;
 		//oldY = y;
-		
+		panel.setStrokeWidth(strokeThickness);
 		
 	}
 	public void setPoint(int x1, int y1, int x2, int y2){
@@ -82,7 +88,12 @@ public class Canvas extends JComponent {
 	public void setColor(Color color){
 		paintColor = color;
 	}
-
+	public Color getColor(){
+		return paintColor;
+	}
+	public int getStrokeThickness(){
+		return strokeThickness;
+	}
 
 
 }

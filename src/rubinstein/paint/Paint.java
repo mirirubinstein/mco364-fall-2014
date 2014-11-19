@@ -11,33 +11,34 @@ import javax.swing.JFrame;
 //homework: color chooser should work, and display stroke width and color
 public class Paint extends JFrame {
 	private JButton colorButton;
+	private Canvas canvas;
+	private BrushPanel panel;
+	private Color choice;
 	public Paint(){
-		setSize(800,600);
+		setSize(1000,600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Paint");
 		setLocationRelativeTo(null);
-	//	BorderLayout layout = new BorderLayout();
-	//	Container container = getContentPane();
-	//	container.setLayout(layout);
+	
+		panel = new BrushPanel();
+		canvas = new Canvas(panel);
 		
-		Canvas canvas = new Canvas();
 		add(canvas, BorderLayout.CENTER);
+		add(panel, BorderLayout.EAST);
 		DrawListener listener = new DrawListener(canvas);
 		canvas.addMouseMotionListener(listener);
 		
 		colorButton = new JButton("ColorPanel");
 		add(colorButton, BorderLayout.NORTH);
-	//	ColorPanel colorPanel = new ColorPanel(canvas);
-	//	add(colorPanel, BorderLayout.EAST);
-		
-		
+
 		
 		  ActionListener actionListener = new ActionListener() {
 		      public void actionPerformed(ActionEvent actionEvent) {
 		        Color initialBackground = colorButton.getBackground();
-		        Color choice = JColorChooser.showDialog(null, "JColorChooser Sample", initialBackground);
+		        choice = JColorChooser.showDialog(null, "JColorChooser Sample", initialBackground);
 		        if (choice != null) {
 		          canvas.setColor(choice);
+		          panel.setColorPanel(choice);
 		        }
 		      }
 		    };
