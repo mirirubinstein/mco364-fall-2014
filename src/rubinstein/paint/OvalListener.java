@@ -3,40 +3,27 @@ package rubinstein.paint;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
-public class PencilListener implements DrawListener{
+public class OvalListener implements DrawListener {
 	private Canvas canvas;
-	private int oldX, oldY, currentX, currentY;
-	private int strokeThickness;
 	private Graphics2D g;
-
-	public PencilListener(Canvas canvas){
+	private int x1, y1, x2, y2;
+	private int strokeThickness;
+	public OvalListener(Canvas canvas){
 		this.canvas = canvas;
 		g = (Graphics2D) canvas.getImage().getGraphics();
 		strokeThickness = canvas.getStrokeThickness();
-	
 	}
 
-	
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		setPoint(oldX, oldY, e.getX(), e.getY());		
-		canvas.repaint();
-		
-		
-	}
-	public void setPoint(int x1, int y1, int x2, int y2){
-		currentX = x2;
-		currentY = y2;
+		x2 = e.getX();
+		y2 = e.getY();
 		
 		draw(g);
+		canvas.repaint();
 		
-		oldX = currentX;
-		oldY= currentY;	
 	}
-
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
@@ -44,13 +31,11 @@ public class PencilListener implements DrawListener{
 		
 	}
 
-
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mouseClicked(MouseEvent e) {
+		
 		
 	}
-
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
@@ -58,21 +43,19 @@ public class PencilListener implements DrawListener{
 		
 	}
 
-
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
-
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		oldX = e.getX();
-		oldY = e.getY();
+		x1 = e.getX();
+		y1 = e.getY();
+		
 	}
-
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
@@ -80,14 +63,14 @@ public class PencilListener implements DrawListener{
 		
 	}
 
-
 	@Override
 	public void draw(Graphics2D g) {
+		// TODO Auto-generated method stub
 		g.setStroke(new BasicStroke(canvas.getStrokeThickness(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		g.setColor(canvas.getColor());
-
-		g.drawLine(oldX, oldY, currentX, currentY);
+		g.drawOval(x1, y1, x2, y2);
+		//System.out.println(x1 + "\n" + y1 + "\n" +x2 + "\n" +y2+ "\n" );
+		
 	}
-
 
 }

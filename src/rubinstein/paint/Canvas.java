@@ -24,8 +24,7 @@ public class Canvas extends JComponent {
 	
 	public Canvas(BrushPanel panel){
 		this.panel = panel;
-		
-	image = new BufferedImage(800,600, BufferedImage.TYPE_INT_ARGB);
+		image = new BufferedImage(1000,600, BufferedImage.TYPE_INT_ARGB);
 		paintColor = Color.BLACK;
 		strokeThickness = 10;
 		
@@ -38,7 +37,7 @@ public class Canvas extends JComponent {
             	  strokeThickness = 1;
               }else{
               strokeThickness += scrolledAmount;
-               
+            
               }
            
               repaint();
@@ -71,6 +70,10 @@ public class Canvas extends JComponent {
 	}
 	public Image getImage(){
 		return image;
+	}
+	public void setNewImage(){
+		image =  new BufferedImage(1000,600, BufferedImage.TYPE_INT_ARGB);
+		repaint();
 	}
 	
 

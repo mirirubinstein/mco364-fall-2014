@@ -3,10 +3,9 @@ package rubinstein.paint;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.geom.Rectangle2D;
 
-public class RectListener implements MouseListener,MouseMotionListener{
+public class RectListener implements DrawListener{
 	private Canvas canvas;
 	private Graphics2D g;
 	private int x1, y1, x2, y2;
@@ -21,10 +20,8 @@ public class RectListener implements MouseListener,MouseMotionListener{
 	public void mouseDragged(MouseEvent e) {
 		x2 = e.getX();
 		y2 = e.getY();
-		g.setStroke(new BasicStroke(strokeThickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-		g.setColor(canvas.getColor());
-		g.drawRect(x1, y1, x2, y2);
-		//System.out.println(x1 + "\n" + y1 + "\n" +x2 + "\n" +y2+ "\n" );
+		
+		draw(g);
 		canvas.repaint();
 		
 	}
@@ -64,6 +61,17 @@ public class RectListener implements MouseListener,MouseMotionListener{
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void draw(Graphics2D g) {
+		// TODO Auto-generated method stub
+		g.setStroke(new BasicStroke(canvas.getStrokeThickness(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+		g.setColor(canvas.getColor());
+		g.drawRect(x1, y1, x2, y2);
+		   
+		//System.out.println(x1 + "\n" + y1 + "\n" +x2 + "\n" +y2+ "\n" );
 		
 	}
 

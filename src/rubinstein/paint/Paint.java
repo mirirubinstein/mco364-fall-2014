@@ -15,7 +15,8 @@ import javax.swing.JFrame;
 public class Paint extends JFrame {
 	private JButton colorButton;
 	private Canvas canvas;
-	private BrushPanel panel;
+	private BrushPanel brushPanel;
+	private ButtonPanel buttonPanel;
 	private Color choice;
 
 	public Paint() {
@@ -24,14 +25,15 @@ public class Paint extends JFrame {
 		setTitle("Paint");
 		setLocationRelativeTo(null);
 
-		panel = new BrushPanel();
-		canvas = new Canvas(panel);
+		brushPanel = new BrushPanel();
+		canvas = new Canvas(brushPanel);
+		buttonPanel = new ButtonPanel(canvas);
+		
 
 		add(canvas, BorderLayout.CENTER);
-		add(panel, BorderLayout.EAST);
-		RectListener listener = new RectListener(canvas);
-		canvas.addMouseMotionListener(listener);
-		canvas.addMouseListener(listener);
+		add(brushPanel, BorderLayout.EAST);
+		add(buttonPanel, BorderLayout.SOUTH);
+	
 
 		colorButton = new JButton("ColorPanel");
 		add(colorButton, BorderLayout.NORTH);
@@ -43,7 +45,7 @@ public class Paint extends JFrame {
 						initialBackground);
 				if (choice != null) {
 					canvas.setColor(choice);
-					panel.setColorPanel(choice);
+					brushPanel.setColorPanel(choice);
 				}
 			}
 		};
