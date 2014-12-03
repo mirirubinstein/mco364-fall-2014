@@ -7,12 +7,10 @@ import java.awt.geom.Rectangle2D;
 
 public class RectListener implements DrawListener{
 	private Canvas canvas;
-	private Graphics2D g;
 	private int x1, y1, x2, y2;
 	private int strokeThickness;
 	public RectListener(Canvas canvas){
 		this.canvas = canvas;
-		g = (Graphics2D) canvas.getImage().getGraphics();
 		strokeThickness = canvas.getStrokeThickness();
 	}
 
@@ -20,10 +18,7 @@ public class RectListener implements DrawListener{
 	public void mouseDragged(MouseEvent e) {
 		x2 = e.getX();
 		y2 = e.getY();
-		
-		draw(g);
 		canvas.repaint();
-		
 	}
 
 	@Override
@@ -59,20 +54,23 @@ public class RectListener implements DrawListener{
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
+	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
+		x2 = e.getX();
+		y2 = e.getY();
+		
+		drawPreview((Graphics2D) canvas.getImage().getGraphics());
+		canvas.repaint();
 		
 	}
 
 	@Override
-	public void draw(Graphics2D g) {
+	public void drawPreview(Graphics2D g) {
 		// TODO Auto-generated method stub
 		g.setStroke(new BasicStroke(canvas.getStrokeThickness(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		g.setColor(canvas.getColor());
-		g.drawRect(x1, y1, x2, y2);
-		   
-		//System.out.println(x1 + "\n" + y1 + "\n" +x2 + "\n" +y2+ "\n" );
-		
+		g.drawRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2), Math.abs(y1 - y2));   
+
 	}
 
 }

@@ -20,7 +20,7 @@ public class OvalListener implements DrawListener {
 		x2 = e.getX();
 		y2 = e.getY();
 		
-		draw(g);
+		drawPreview(g);
 		canvas.repaint();
 		
 	}
@@ -64,13 +64,12 @@ public class OvalListener implements DrawListener {
 	}
 
 	@Override
-	public void draw(Graphics2D g) {
+	public void drawPreview(Graphics2D g) {
 		// TODO Auto-generated method stub
 		g.setStroke(new BasicStroke(canvas.getStrokeThickness(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		g.setColor(canvas.getColor());
-		g.drawOval(x1, y1, x2, y2);
-		//System.out.println(x1 + "\n" + y1 + "\n" +x2 + "\n" +y2+ "\n" );
-		
+		g.drawOval(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2), Math.abs(y1 - y2));
+
 	}
 
 }

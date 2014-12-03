@@ -21,7 +21,7 @@ public class FillOvalListener implements DrawListener {
 		x2 = e.getX();
 		y2 = e.getY();
 
-		draw(g);
+		drawPreview(g);
 		canvas.repaint();
 
 	}
@@ -64,7 +64,7 @@ public class FillOvalListener implements DrawListener {
 	}
 
 	@Override
-	public void draw(Graphics2D g) {
+	public void drawPreview(Graphics2D g) {
 		// TODO Auto-generated method stub
 		g.setStroke(new BasicStroke(canvas.getStrokeThickness(), BasicStroke.CAP_ROUND,
 				BasicStroke.JOIN_ROUND));

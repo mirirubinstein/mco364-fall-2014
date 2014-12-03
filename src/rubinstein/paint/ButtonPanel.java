@@ -38,6 +38,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
 		add(ovalButton);
 		add(fillOvalButton);
 		add(clearScreenButton);
+		pencilButton.doClick();
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
 		if (e.getSource() == clearScreenButton) {
 			canvas.setNewImage();
 		} else {
-
+			canvas.removeListener();
 			canvas.removeMouseListener(listener);
 			canvas.removeMouseMotionListener(listener);
 

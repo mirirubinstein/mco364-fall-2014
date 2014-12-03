@@ -28,6 +28,10 @@ public class Canvas extends JComponent {
 		paintColor = Color.BLACK;
 		strokeThickness = 10;
 		
+		listener = new PencilListener(this);
+		addMouseMotionListener(listener);
+		addMouseListener(listener);
+		
 
 		addMouseWheelListener(new MouseWheelListener() {
             public void mouseWheelMoved(MouseWheelEvent e) {
@@ -39,7 +43,6 @@ public class Canvas extends JComponent {
               strokeThickness += scrolledAmount;
             
               }
-           
               repaint();
             }
         });
@@ -54,7 +57,7 @@ public class Canvas extends JComponent {
 		panel.setStrokeWidth(strokeThickness);
 	
 		// all the listeners will implement this method differently, depending on its shape
-		//listener.drawPreview((Graphics2D) g);
+		listener.drawPreview((Graphics2D) g);
 		
 		
 	}
@@ -71,11 +74,14 @@ public class Canvas extends JComponent {
 	public Image getImage(){
 		return image;
 	}
+	public void removeListener(){
+		removeMouseListener(listener);
+		removeMouseMotionListener(listener);
+	}
 	public void setNewImage(){
 		image =  new BufferedImage(1000,600, BufferedImage.TYPE_INT_ARGB);
 		repaint();
 	}
 	
-
 
 }
