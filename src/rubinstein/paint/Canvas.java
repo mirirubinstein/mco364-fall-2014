@@ -20,6 +20,7 @@ public class Canvas extends JComponent {
 	private int strokeThickness;
 	private Image image;
 	private Color paintColor;
+	private boolean preview;
 
 	
 	public Canvas(BrushPanel panel){
@@ -27,10 +28,9 @@ public class Canvas extends JComponent {
 		image = new BufferedImage(1000,600, BufferedImage.TYPE_INT_ARGB);
 		paintColor = Color.BLACK;
 		strokeThickness = 10;
+		preview = true;
 		
-		listener = new PencilListener(this);
-		addMouseMotionListener(listener);
-		addMouseListener(listener);
+		addListener(new PencilListener(this));
 		
 
 		addMouseWheelListener(new MouseWheelListener() {
@@ -43,7 +43,6 @@ public class Canvas extends JComponent {
               strokeThickness += scrolledAmount;
             
               }
-              repaint();
             }
         });
 		
@@ -51,15 +50,17 @@ public class Canvas extends JComponent {
 	
 	
 	protected void paintComponent(Graphics g){
-		//super.paintComponent(g);
+	
 	
 		g.drawImage(image,0,0,null);
 		panel.setStrokeWidth(strokeThickness);
 	
 		// all the listeners will implement this method differently, depending on its shape
+		if(preview){
 		listener.drawPreview((Graphics2D) g);
-		
-		
+		}
+	
+		preview = true;
 	}
 	
 	public void setColor(Color color){
@@ -74,6 +75,12 @@ public class Canvas extends JComponent {
 	public Image getImage(){
 		return image;
 	}
+	public boolean getPreview(){
+		return preview;
+	}
+	public void setPreview (boolean preview){
+		this.preview = preview;
+	}
 	public void removeListener(){
 		removeMouseListener(listener);
 		removeMouseMotionListener(listener);
@@ -82,6 +89,12 @@ public class Canvas extends JComponent {
 		image =  new BufferedImage(1000,600, BufferedImage.TYPE_INT_ARGB);
 		repaint();
 	}
-	
+	public void addListener(DrawListener listener) {
+		this.removeMouseListener(this.listener);
+		this.removeMouseMotionListener(this.listener);
+		this.listener = listener;
+		addMouseListener(listener);
+		addMouseMotionListener(listener);
+		}
 
 }

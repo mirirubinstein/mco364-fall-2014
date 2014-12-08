@@ -46,11 +46,9 @@ public class ButtonPanel extends JPanel implements ActionListener {
 
 		if (e.getSource() == clearScreenButton) {
 			canvas.setNewImage();
+			canvas.setPreview(false);
 		} else {
-			canvas.removeListener();
-			canvas.removeMouseListener(listener);
-			canvas.removeMouseMotionListener(listener);
-
+			canvas.setPreview(true);
 			if (e.getSource() == pencilButton) {
 				listener = new PencilListener(canvas);
 
@@ -67,8 +65,8 @@ public class ButtonPanel extends JPanel implements ActionListener {
 				listener = new FillOvalListener(canvas);
 
 			}
-			canvas.addMouseMotionListener(listener);
-			canvas.addMouseListener(listener);
+			
+			canvas.addListener(listener);
 		}
 	}
 }
