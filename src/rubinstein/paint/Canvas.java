@@ -12,7 +12,7 @@ import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
-//this class should have only one responsibility! to draw the image!
+
 
 public class Canvas extends JComponent {
 	private DrawListener listener;
@@ -96,5 +96,6 @@ public class Canvas extends JComponent {
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
 		}
+	
 
 }
