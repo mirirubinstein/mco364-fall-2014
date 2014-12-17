@@ -25,6 +25,7 @@ public class BucketFillListener implements DrawListener {
 		// TODO Auto-generated method stub
 	Graphics2D g = (Graphics2D) canvas.getGraphics();
 	x = e.getX();
+	
 	y = e.getY();
 	
 	
