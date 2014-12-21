@@ -13,6 +13,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
 	private JButton fillRectButton;
 	private JButton ovalButton;
 	private JButton fillOvalButton;
+	private JButton bucketFillButton;
 	private JButton clearScreenButton;
 	private DrawListener listener;
 
@@ -23,6 +24,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
 		fillRectButton = new JButton("Fill Rectangle");
 		ovalButton = new JButton("Oval");
 		fillOvalButton = new JButton("Fill Oval");
+		bucketFillButton = new JButton("Bucket Fill");
 		clearScreenButton = new JButton("CLEAR Screen");
 
 		pencilButton.addActionListener(this);
@@ -30,6 +32,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
 		fillRectButton.addActionListener(this);
 		ovalButton.addActionListener(this);
 		fillOvalButton.addActionListener(this);
+		bucketFillButton.addActionListener(this);
 		clearScreenButton.addActionListener(this);
 
 		add(pencilButton);
@@ -37,6 +40,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
 		add(fillRectButton);
 		add(ovalButton);
 		add(fillOvalButton);
+		add(bucketFillButton);
 		add(clearScreenButton);
 		pencilButton.doClick();
 	}
@@ -64,6 +68,8 @@ public class ButtonPanel extends JPanel implements ActionListener {
 			} else if (e.getSource() == fillOvalButton) {
 				listener = new FillOvalListener(canvas);
 
+			}else if (e.getSource() == bucketFillButton) {
+				listener = new BucketFillListener(canvas);
 			}
 			
 			canvas.addListener(listener);
