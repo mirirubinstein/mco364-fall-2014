@@ -17,6 +17,7 @@ public class Paint extends JFrame {
 	private Canvas canvas;
 	private BrushPanel brushPanel;
 	private ButtonPanel buttonPanel;
+	private LayerButtonPanel layerPanel;
 	private Color choice;
 
 	public Paint() {
@@ -28,11 +29,13 @@ public class Paint extends JFrame {
 		brushPanel = new BrushPanel();
 		canvas = new Canvas(brushPanel);
 		buttonPanel = new ButtonPanel(canvas);
+		layerPanel = new LayerButtonPanel(canvas);
 		
 
 		add(canvas, BorderLayout.CENTER);
 		add(brushPanel, BorderLayout.EAST);
 		add(buttonPanel, BorderLayout.SOUTH);
+		add(layerPanel, BorderLayout.WEST);
 	
 
 		colorButton = new JButton("ColorPanel");

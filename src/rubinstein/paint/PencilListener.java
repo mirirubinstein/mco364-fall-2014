@@ -26,7 +26,7 @@ public class PencilListener implements DrawListener{
 		currentX = x2;
 		currentY = y2;
 		
-		drawPreview((Graphics2D) canvas.getImage().getGraphics());
+		drawPreview((Graphics2D) canvas.getCurrentImage().getGraphics());
 		
 		oldX = currentX;
 		oldY= currentY;	

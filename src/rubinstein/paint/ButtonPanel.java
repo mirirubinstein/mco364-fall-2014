@@ -14,6 +14,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
 	private JButton ovalButton;
 	private JButton fillOvalButton;
 	private JButton bucketFillButton;
+	private JButton clearCurrentLayerButton;
 	private JButton clearScreenButton;
 	private DrawListener listener;
 
@@ -25,7 +26,8 @@ public class ButtonPanel extends JPanel implements ActionListener {
 		ovalButton = new JButton("Oval");
 		fillOvalButton = new JButton("Fill Oval");
 		bucketFillButton = new JButton("Bucket Fill");
-		clearScreenButton = new JButton("CLEAR Screen");
+		clearCurrentLayerButton = new JButton("CLEAR current layer");
+		clearScreenButton = new JButton("CLEAR all layers");
 
 		pencilButton.addActionListener(this);
 		rectButton.addActionListener(this);
@@ -33,6 +35,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
 		ovalButton.addActionListener(this);
 		fillOvalButton.addActionListener(this);
 		bucketFillButton.addActionListener(this);
+		clearCurrentLayerButton.addActionListener(this);
 		clearScreenButton.addActionListener(this);
 
 		add(pencilButton);
@@ -41,6 +44,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
 		add(ovalButton);
 		add(fillOvalButton);
 		add(bucketFillButton);
+		add(clearCurrentLayerButton);
 		add(clearScreenButton);
 		pencilButton.doClick();
 	}
@@ -49,7 +53,10 @@ public class ButtonPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == clearScreenButton) {
-			canvas.setNewImage();
+			canvas.setAllNewImages();
+			canvas.setPreview(false);
+		}else if(e.getSource() == clearCurrentLayerButton){
+			canvas.setNewImage(canvas.getCurrentLayer());
 			canvas.setPreview(false);
 		} else {
 			canvas.setPreview(true);

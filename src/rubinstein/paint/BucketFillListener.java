@@ -8,6 +8,7 @@ import java.util.Stack;
 
 public class BucketFillListener implements DrawListener{
 	private Canvas canvas;
+	private int currentLayer;
 	
 	public BucketFillListener(Canvas canvas){
 		this.canvas = canvas;
@@ -30,7 +31,7 @@ public class BucketFillListener implements DrawListener{
 		// TODO Auto-generated method stub
 		int x = e.getX();
 		int y = e.getY();
-		BufferedImage bufferedImage = (BufferedImage) canvas.getImage();
+		BufferedImage bufferedImage = (BufferedImage) canvas.getCurrentImage();
 		int clickedColor = bufferedImage.getRGB(x, y);
 		int newColor = canvas.getColor().getRGB();
 		floodFill4Stack(x,y, newColor, clickedColor, bufferedImage);

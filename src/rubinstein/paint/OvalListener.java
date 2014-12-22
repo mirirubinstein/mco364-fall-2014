@@ -62,7 +62,7 @@ public class OvalListener implements DrawListener {
 		x2 = e.getX();
 		y2 = e.getY();
 
-		draw((Graphics2D) canvas.getImage().getGraphics());
+		draw((Graphics2D) canvas.getCurrentImage().getGraphics());
 		canvas.repaint();
 
 	}

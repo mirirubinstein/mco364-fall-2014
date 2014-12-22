@@ -65,7 +65,7 @@ public class RectListener implements DrawListener{
 		y2 = e.getY();
 		
 
-		draw((Graphics2D) canvas.getImage().getGraphics());
+		draw((Graphics2D) canvas.getCurrentImage().getGraphics());
 		canvas.repaint();
 		
 	}
