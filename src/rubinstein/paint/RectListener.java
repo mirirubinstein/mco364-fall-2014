@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 import rubinstein.paint.message.Client;
+import rubinstein.paint.message.ShapeMessage;
 
 public class RectListener implements DrawListener{
 	private Canvas canvas;
@@ -77,8 +78,10 @@ public class RectListener implements DrawListener{
 	//	g.setStroke(new BasicStroke(canvas.getStrokeThickness(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 	//	g.setColor(canvas.getColor());
 	//	g.drawRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2), Math.abs(y1 - y2)); 
+	
+	ShapeMessage message = new ShapeMessage("Rect", x1, y1, x2, y2, canvas.getColor().getRGB(), strokeThickness, Boolean.FALSE );	
 	try {
-		client.sendMessage("RECT " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + canvas.getColor().getRGB() + " " + strokeThickness + Boolean.FALSE.toString());
+		client.sendMessage(message.toString());
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

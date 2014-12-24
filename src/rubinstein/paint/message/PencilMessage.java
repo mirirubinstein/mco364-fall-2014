@@ -71,8 +71,7 @@ public class PencilMessage  implements PaintMessage {
 
 	@Override
 	public String toString() {
-		return "LineMessage [x1=" + x1 + ", y1=" + y1 + ", x2=" + x2 + ", y2="
-				+ y2 + ", color=" + color + ", stroke=" + stroke + "]";
+		return x1 + " "  + y1 + " " + x2 + " " + y2 + " " + color + " " + stroke + "\n";
 	}
 
 	@Override

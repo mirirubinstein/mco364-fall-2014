@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 import rubinstein.paint.message.Client;
+import rubinstein.paint.message.PencilMessage;
 
 public class PencilListener implements DrawListener{
 	private Canvas canvas;
@@ -87,8 +88,9 @@ public class PencilListener implements DrawListener{
 		//g.setStroke(new BasicStroke(canvas.getStrokeThickness(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		//g.setColor(canvas.getColor());
 		//g.drawLine(oldX, oldY, currentX, currentY);
+		PencilMessage message = new PencilMessage(oldX, oldY, currentX, currentY, canvas.getColor().getRGB(), strokeThickness);
 		try {
-			client.sendMessage(oldX + " "  + oldY + " " + currentX + " " + currentY + " " + canvas.getColor().getRGB() + " " + strokeThickness );
+			client.sendMessage(message.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

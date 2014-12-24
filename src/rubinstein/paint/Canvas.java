@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.swing.JComponent;
 
@@ -21,9 +22,10 @@ public class Canvas extends JComponent {
 	private Color paintColor;
 	private boolean preview;
 
-	public Canvas(BrushPanel panel, Client client) {
+	public Canvas(BrushPanel panel, Client client) throws IOException {
 		this.panel = panel;
 		this.client = client;
+
 		image = new BufferedImage(1000, 600, BufferedImage.TYPE_INT_ARGB);
 		paintColor = Color.BLACK;
 		strokeThickness = 10;
