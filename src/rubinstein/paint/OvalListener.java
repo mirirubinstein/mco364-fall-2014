@@ -1,18 +1,22 @@
 package rubinstein.paint;
 
-import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+
+import rubinstein.paint.message.Client;
 
 public class OvalListener implements DrawListener {
 	private Canvas canvas;
 	private int x1, y1, x2, y2;
 	private int strokeThickness;
+	private Client client;
 
 	// private boolean drawPreview;
 	public OvalListener(Canvas canvas) {
 		this.canvas = canvas;
 		strokeThickness = canvas.getStrokeThickness();
+		client = canvas.getClient();
 	}
 
 	@Override
@@ -69,9 +73,16 @@ public class OvalListener implements DrawListener {
 
 	public void draw(Graphics2D g) {
 
-		g.setStroke(new BasicStroke(canvas.getStrokeThickness(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-		g.setColor(canvas.getColor());
-		g.drawOval(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2), Math.abs(y1 - y2));
+	//	g.setStroke(new BasicStroke(canvas.getStrokeThickness(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+	//	g.setColor(canvas.getColor());
+	//	g.drawOval(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2), Math.abs(y1 - y2));
+	
+		try {
+			client.sendMessage("OVAL " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + canvas.getColor().getRGB() + " " + strokeThickness + Boolean.FALSE.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

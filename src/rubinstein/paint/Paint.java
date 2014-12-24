@@ -4,14 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.UnknownHostException;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 
-//homework: add to your interface the ability to change between pencil, drawing oval, drawing rect, filling oval, filling rect, drawing line
-//clear screen
-//buttons to implement it
+import rubinstein.paint.message.Client;
+
+
 public class Paint extends JFrame {
 	private JButton colorButton;
 	private Canvas canvas;
@@ -19,14 +21,15 @@ public class Paint extends JFrame {
 	private ButtonPanel buttonPanel;
 	private Color choice;
 
-	public Paint() {
+	public Paint() throws UnknownHostException, IOException {
+		Client client = new Client();
 		setSize(1000, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Paint");
 		setLocationRelativeTo(null);
 
 		brushPanel = new BrushPanel();
-		canvas = new Canvas(brushPanel);
+		canvas = new Canvas(brushPanel, client);
 		buttonPanel = new ButtonPanel(canvas);
 		
 
@@ -52,7 +55,7 @@ public class Paint extends JFrame {
 		colorButton.addActionListener(actionListener);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnknownHostException, IOException {
 		Paint paint = new Paint();
 		paint.setVisible(true);
 	}
