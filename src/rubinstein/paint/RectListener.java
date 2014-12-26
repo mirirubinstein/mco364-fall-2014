@@ -58,7 +58,7 @@ public class RectListener implements DrawListener{
 	public void mouseDragged(MouseEvent e) {
 		x2 = e.getX();
 		y2 = e.getY();
-		canvas.repaint();
+	//	canvas.repaint();
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class RectListener implements DrawListener{
 		
 
 		draw((Graphics2D) canvas.getImage().getGraphics());
-		canvas.repaint();
+	//	canvas.repaint();
 		
 	}
 	public void draw(Graphics2D g){
@@ -79,14 +79,14 @@ public class RectListener implements DrawListener{
 	//	g.setColor(canvas.getColor());
 	//	g.drawRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2), Math.abs(y1 - y2)); 
 	
-	ShapeMessage message = new ShapeMessage("Rect", x1, y1, x2, y2, canvas.getColor().getRGB(), strokeThickness, Boolean.FALSE );	
+	ShapeMessage message = new ShapeMessage("RECT", x1, x2, y1, y2, canvas.getColor().getRGB(), strokeThickness, Boolean.FALSE );	
 	try {
 		client.sendMessage(message.toString());
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-		
+	//	canvas.repaint();
 	}
 
 	@Override

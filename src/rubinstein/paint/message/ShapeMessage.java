@@ -1,15 +1,16 @@
 package rubinstein.paint.message;
 
+import java.awt.BasicStroke;
+import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Graphics2D;
-
-import rubinstein.paint.message.PaintMessage;
 
 public class ShapeMessage implements PaintMessage {
 	private String type;
-	private int x;
-	private int y;
-	private int width;
-	private int height;
+	private int x1;
+	private int x2;
+	private int y1;
+	private int y2;
 	private int color;
 	private int stroke;
 	private boolean fill;
@@ -17,10 +18,10 @@ public class ShapeMessage implements PaintMessage {
 	public ShapeMessage(String type, int x, int y, int width, int height, int color, int stroke, boolean fill){
 		super();
 		this.type = type;
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
+		this.x1 = x;
+		this.x2 = y;
+		this.y1 = width;
+		this.y2 = height;
 		this.color = color;
 		this.stroke = stroke;
 		this.fill = fill;
@@ -38,42 +39,42 @@ public class ShapeMessage implements PaintMessage {
 
 
 	public int getX() {
-		return x;
+		return x1;
 	}
 
 
 	public void setX(int x) {
-		this.x = x;
+		this.x1 = x;
 	}
 
 
 	public int getY() {
-		return y;
+		return x2;
 	}
 
 
 	public void setY(int y) {
-		this.y = y;
+		this.x2 = y;
 	}
 
 
 	public int getWidth() {
-		return width;
+		return y1;
 	}
 
 
 	public void setWidth(int width) {
-		this.width = width;
+		this.y1 = width;
 	}
 
 
 	public int getHeight() {
-		return height;
+		return y2;
 	}
 
 
 	public void setHeight(int height) {
-		this.height = height;
+		this.y2 = height;
 	}
 
 
@@ -110,26 +111,33 @@ public class ShapeMessage implements PaintMessage {
 
 	@Override
 	public String toString() {
-		return "SHAPE " + x + " " + y + " " + width + " " + height + " " + color + " " + stroke + " " + fill + "\n" ;
+		return  "SHAPE " + type + " "  + x1 + " " + x2 + " " + y1 + " " + y2 + " " + color + " " + stroke + " " + fill + "\n" ;
 	}
 
 
 	@Override
 	public void apply(Graphics2D g) {
+		g.setColor(new Color(color));
+		g.setStroke(new BasicStroke(stroke, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+
 		switch (type) {
 		case "RECT":
 			if (fill) {
-				g.fillRect(x, y, width, height);
+				g.fillRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2),
+									Math.abs(y1 - y2));
 			} else {
-				g.drawRect(x, y, width, height);
+				g.drawRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2),
+									Math.abs(y1 - y2));
 			}
+			break;
 		case "OVAL":
 			if (fill) {
-				g.fillOval(x, y, width, height);
+				g.fillOval(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2), Math.abs(y1 - y2));
 			} else {
-				g.drawOval(x, y, width, height);
+				g.drawOval(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2), Math.abs(y1 - y2));
 			}
 		}
+		
 	}
 
 }

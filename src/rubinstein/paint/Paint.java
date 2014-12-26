@@ -22,14 +22,13 @@ public class Paint extends JFrame {
 	private Color choice;
 
 	public Paint() throws UnknownHostException, IOException {
-		Client client = new Client();
 		setSize(1000, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Paint");
 		setLocationRelativeTo(null);
 
 		brushPanel = new BrushPanel();
-		canvas = new Canvas(brushPanel, client);
+		canvas = new Canvas(brushPanel);
 		buttonPanel = new ButtonPanel(canvas);
 		
 

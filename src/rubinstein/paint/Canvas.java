@@ -22,10 +22,9 @@ public class Canvas extends JComponent {
 	private Color paintColor;
 	private boolean preview;
 
-	public Canvas(BrushPanel panel, Client client) throws IOException {
+	public Canvas(BrushPanel panel) throws IOException {
 		this.panel = panel;
-		this.client = client;
-
+		client = new Client(this);
 		image = new BufferedImage(1000, 600, BufferedImage.TYPE_INT_ARGB);
 		paintColor = Color.BLACK;
 		strokeThickness = 10;
@@ -54,9 +53,9 @@ public class Canvas extends JComponent {
 
 		// all the listeners will implement this method differently, depending
 		// on its shape
-		if (preview) {
-			listener.drawPreview((Graphics2D) g);
-		}
+		//if (preview) {
+		//	listener.drawPreview((Graphics2D) g);
+		//}
 
 		preview = true;
 	}

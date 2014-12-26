@@ -5,25 +5,28 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import rubinstein.paint.ListeningThread;
+import rubinstein.paint.Canvas;
+
 
 public class Client {
 
 	private Socket socket;
 	private OutputStream out;
-	private ListeningThread thread;
+	private Thread thread;
 
 	
-	public Client() throws UnknownHostException, IOException {
-		//socket = new Socket("localhost", 3773);
-		socket = new Socket("192.168.117.107", 3773);
-		thread = new ListeningThread(socket);
+	public Client(Canvas canvas) throws UnknownHostException, IOException {
+		socket = new Socket("127.0.0.1", 3773);
+		//socket = new Socket("192.168.117.107", 3773);
+		out = socket.getOutputStream();
+		thread = new ListeningThread(socket, canvas);
+		thread.start();
 		
 	}
 	public void sendMessage(String message) throws IOException {
 		out.write(message.toString().getBytes());
 		out.flush();
-		System.out.println(message);
+	//	System.out.println(message);
 	}
 	
 }

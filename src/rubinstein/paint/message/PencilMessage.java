@@ -1,5 +1,7 @@
 package rubinstein.paint.message;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class PencilMessage  implements PaintMessage {
@@ -71,11 +73,13 @@ public class PencilMessage  implements PaintMessage {
 
 	@Override
 	public String toString() {
-		return x1 + " "  + y1 + " " + x2 + " " + y2 + " " + color + " " + stroke + "\n";
+		return "LINE " + x1 + " "  + y1 + " " + x2 + " " + y2 + " " + color + " " + stroke + "\n";
 	}
 
 	@Override
 	public void apply(Graphics2D g) {
+		g.setColor(new Color(color));
+		g.setStroke(new BasicStroke(stroke, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		g.drawLine(x1, y1, x2, y2);
 		
 	}

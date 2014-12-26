@@ -3,21 +3,24 @@ package rubinstein.paint;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.io.IOException;
+
+import rubinstein.paint.message.BucketFillMessage;
+import rubinstein.paint.message.Client;
 
 public class BucketFillListener implements DrawListener {
 	private Canvas canvas;
 	private int x,y;
 //	int screenBuffer[][];
-	BufferedImage bufferedImage;
-
+	private BufferedImage bufferedImage;
+	private Client client;
 
 
 	public BucketFillListener(Canvas canvas){
 		this.canvas = canvas;
 		// screenBuffer = new int[canvas.getWidth()][canvas.getHeight()];
 		 bufferedImage = (BufferedImage) canvas.getImage();
+		 client = canvas.getClient();
 		}
 
 	@Override
@@ -33,49 +36,10 @@ public class BucketFillListener implements DrawListener {
 	int graphicsRGB = g.getColor().getRGB();
 	int imageRGB = bufferedImage.getRGB(x,y);
 	
-	floodFill8(x,y, imageRGB, graphicsRGB);
-/*	System.out.println(graphicsRGB);
-	System.out.println(imageRGB);
-	int[][] neighbors = getNeighborPixels(x,y);
-	for(int i = 0; i < neighbors.length; i++){
-		for(int j = 0; j < neighbors[i].length; j++){
-			System.out.println(neighbors[i][j]);
-				bufferedImage.setRGB(x,y, graphicsRGB);
-			 if (bufferedImage.getRGB(neighbors[i][0], neighbors[i][1]) == imageRGB) {
-                 bufferedImage.setRGB(neighbors[i][0], neighbors[i][1], graphicsRGB);
-			 }
-                  canvas.repaint(); 
-		}
-		
-	}
+	//floodFill8(x,y, imageRGB, graphicsRGB);
+	drawPreview(g);
 	
-		
-	/*	while(graphicsRGB != imageRGB){
-		
-		  Queue<int[]> pixelQueue = new LinkedList<int[]>();
-          pixelQueue.add(new int[] {x, y});        
-          int[] pixel;
-          int nx, ny;
-          
-          while (!pixelQueue.isEmpty()) {
-              pixel = pixelQueue.poll();
-              nx = pixel[0];
-              ny = pixel[1];
-              if (bufferedImage.getRGB(nx, ny) == imageRGB) {
-                  bufferedImage.setRGB(nx, ny, graphicsRGB);
-                  
-                  for (int[] neighbor : getNeighborPixels(nx, ny)) {
-                      if (bufferedImage.getRGB(neighbor[0], neighbor[1]) != graphicsRGB) {
-                          pixelQueue.add(new int[] {neighbor[0], neighbor[1]});
-                      }
-                  }
-              }
-		
-          }
-		
-		
-	} 
-	*/	
+
 	}
 	
 	void floodFill8(int x, int y, int newColor, int oldColor)
@@ -153,6 +117,13 @@ public class BucketFillListener implements DrawListener {
 	@Override
 	public void drawPreview(Graphics2D g) {
 		// TODO Auto-generated method stub
+		BucketFillMessage message = new BucketFillMessage(x, y, bufferedImage.getRGB(x,y));
+		try {
+			client.sendMessage(message.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

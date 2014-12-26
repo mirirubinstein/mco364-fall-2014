@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 import rubinstein.paint.message.Client;
+import rubinstein.paint.message.ShapeMessage;
 
 public class FillRectListener implements DrawListener {
 	private Canvas canvas;
@@ -56,7 +57,7 @@ public class FillRectListener implements DrawListener {
 	public void mouseDragged(MouseEvent e) {
 		x2 = e.getX();
 		y2 = e.getY();
-		canvas.repaint();
+	//	canvas.repaint();
 	}
 
 	@Override
@@ -67,7 +68,7 @@ public class FillRectListener implements DrawListener {
 		y2 = e.getY();
 
 		draw((Graphics2D) canvas.getImage().getGraphics());
-		canvas.repaint();
+		//canvas.repaint();
 
 	}
 
@@ -78,9 +79,9 @@ public class FillRectListener implements DrawListener {
 	//	g.setColor(canvas.getColor());
 	//	g.fillRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2),
 	//			Math.abs(y1 - y2));
-
+		ShapeMessage message = new ShapeMessage("RECT", x1, x2, y1, y2, canvas.getColor().getRGB(), strokeThickness, Boolean.TRUE);	
 		try {
-			client.sendMessage("RECT " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + canvas.getColor().getRGB() + " " + strokeThickness + Boolean.TRUE.toString());
+			client.sendMessage(message.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

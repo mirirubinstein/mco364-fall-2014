@@ -8,6 +8,7 @@ public class PaintMessageFactory {
 		
 		String messageType = scanner.next();
 		
+		
 		switch(messageType){
 		case "LINE":
 			int x1 = scanner.nextInt();
