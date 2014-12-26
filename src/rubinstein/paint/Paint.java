@@ -9,9 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 
-//homework: add to your interface the ability to change between pencil, drawing oval, drawing rect, filling oval, filling rect, drawing line
-//clear screen
-//buttons to implement it
+
 public class Paint extends JFrame {
 	private JButton colorButton;
 	private Canvas canvas;

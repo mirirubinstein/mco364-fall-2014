@@ -59,7 +59,12 @@ public class Canvas extends JComponent {
 	
 		// all the listeners will implement this method differently, depending on its shape
 		if(preview){
-		listener.drawPreview((Graphics2D) g);
+			for (int i = 0; i < 4; i++) {
+				g.drawImage(images[i], 0, 0, null);
+				if (i == currentLayer) {
+					listener.drawPreview((Graphics2D) g);
+				}
+			}
 		}
 	
 		preview = true;
