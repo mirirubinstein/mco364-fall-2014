@@ -117,7 +117,7 @@ public class BucketFillListener implements DrawListener {
 	@Override
 	public void drawPreview(Graphics2D g) {
 		// TODO Auto-generated method stub
-		BucketFillMessage message = new BucketFillMessage(x, y, bufferedImage.getRGB(x,y));
+		BucketFillMessage message = new BucketFillMessage(canvas, x, y, bufferedImage.getRGB(x,y));
 		try {
 			client.sendMessage(message.toString());
 		} catch (IOException e) {

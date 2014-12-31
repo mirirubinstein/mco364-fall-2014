@@ -2,7 +2,14 @@ package rubinstein.paint.message;
 
 import java.util.Scanner;
 
+import rubinstein.paint.Canvas;
+
 public class PaintMessageFactory {
+	private Canvas canvas;
+	
+	public PaintMessageFactory(Canvas canvas){
+		this.canvas = canvas;
+	}
 	public PaintMessage getMessage(String message){
 		Scanner scanner = new Scanner(message);
 		
@@ -34,7 +41,7 @@ public class PaintMessageFactory {
 			int X = scanner.nextInt();
 			int Y = scanner.nextInt();
 			int color3 = scanner.nextInt();
-			return new BucketFillMessage(X, Y, color3);
+			return new BucketFillMessage(canvas, X, Y, color3);
 			
 		}
 		return null;

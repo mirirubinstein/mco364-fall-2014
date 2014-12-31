@@ -25,7 +25,7 @@ public class ListeningThread extends Thread{
 		try {
 			
 			StringBuilder message = new StringBuilder("");
-			PaintMessageFactory factory = new PaintMessageFactory();
+			PaintMessageFactory factory = new PaintMessageFactory(canvas);
 			
 			InputStream in = socket.getInputStream();
 			BufferedReader reader = new BufferedReader(
