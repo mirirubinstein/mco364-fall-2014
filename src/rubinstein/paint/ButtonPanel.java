@@ -2,12 +2,17 @@ package rubinstein.paint;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import rubinstein.paint.message.ClearMessage;
+import rubinstein.paint.message.Client;
+
 public class ButtonPanel extends JPanel implements ActionListener {
 	private Canvas canvas;
+	private Client client;
 	private JButton pencilButton;
 	private JButton rectButton;
 	private JButton fillRectButton;
@@ -19,6 +24,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
 
 	public ButtonPanel(Canvas canvas) {
 		this.canvas = canvas;
+		client = canvas.getClient();
 		pencilButton = new JButton("Pencil");
 		rectButton = new JButton("Rectangle");
 		fillRectButton = new JButton("Fill Rectangle");
@@ -49,8 +55,15 @@ public class ButtonPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == clearScreenButton) {
-			canvas.setNewImage();
-			canvas.setPreview(false);
+			//canvas.setNewImage();
+			//canvas.setPreview(false);
+			ClearMessage message = new ClearMessage();
+			try {
+				client.sendMessage(message.toString());
+			} catch (IOException ex) {
+				// TODO Auto-generated catch block
+				ex.printStackTrace();
+			}
 		} else {
 			canvas.setPreview(true);
 			if (e.getSource() == pencilButton) {

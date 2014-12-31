@@ -78,9 +78,12 @@ public class PencilMessage  implements PaintMessage {
 
 	@Override
 	public void apply(Graphics2D g) {
+		try{
 		g.setColor(new Color(color));
 		g.setStroke(new BasicStroke(stroke, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		g.drawLine(x1, y1, x2, y2);
-		
+		}catch(Exception x){
+			
+		}
 	}
 }

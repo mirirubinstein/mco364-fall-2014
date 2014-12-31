@@ -36,7 +36,7 @@ public class PaintMessageFactory {
 			boolean fill = Boolean.valueOf(scanner.next());
 			return new ShapeMessage(type, x, y, width, height, color2, stroke2, fill);
 		case "CLEAR":
-			break;
+			return new ClearMessage();
 		case "BUCKET_FILL":
 			int X = scanner.nextInt();
 			int Y = scanner.nextInt();

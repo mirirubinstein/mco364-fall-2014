@@ -117,6 +117,7 @@ public class ShapeMessage implements PaintMessage {
 
 	@Override
 	public void apply(Graphics2D g) {
+		try{
 		g.setColor(new Color(color));
 		g.setStroke(new BasicStroke(stroke, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 
@@ -137,7 +138,9 @@ public class ShapeMessage implements PaintMessage {
 				g.drawOval(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2), Math.abs(y1 - y2));
 			}
 		}
-		
+		}catch(Exception x){
+			
+		}
 	}
 
 }
