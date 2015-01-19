@@ -64,16 +64,16 @@ public class ButtonPanel extends JPanel implements ActionListener {
 				listener = new PencilListener(canvas);
 
 			} else if (e.getSource() == rectButton) {
-				listener = new RectListener(canvas);
+				listener = new ShapeListener(canvas, "Draw Rectangle");
 
 			} else if (e.getSource() == fillRectButton) {
-				listener = new FillRectListener(canvas);
+				listener = new ShapeListener(canvas, "Fill Rectangle");
 
 			} else if (e.getSource() == ovalButton) {
-				listener = new OvalListener(canvas);
+				listener = new ShapeListener(canvas, "Draw Oval");
 
 			} else if (e.getSource() == fillOvalButton) {
-				listener = new FillOvalListener(canvas);
+				listener = new ShapeListener(canvas, "Fill Oval");
 
 			}else if (e.getSource() == bucketFillButton) {
 				listener = new BucketFillListener(canvas);

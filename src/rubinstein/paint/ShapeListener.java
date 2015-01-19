@@ -3,17 +3,19 @@ package rubinstein.paint;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Rectangle2D;
 
-public class FillRectListener implements DrawListener {
+public class ShapeListener implements DrawListener {
+
 	private Canvas canvas;
 	private int x1, y1, x2, y2;
 	private int strokeThickness;
+	private String shapeType;
 
 	// private boolean drawPreview;
-	public FillRectListener(Canvas canvas) {
+	public ShapeListener(Canvas canvas, String shapeType) {
 		this.canvas = canvas;
 		strokeThickness = canvas.getStrokeThickness();
+		this.shapeType = shapeType;
 	}
 
 	@Override
@@ -73,8 +75,27 @@ public class FillRectListener implements DrawListener {
 		g.setStroke(new BasicStroke(canvas.getStrokeThickness(),
 				BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 		g.setColor(canvas.getColor());
-		g.fillRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2),
-				Math.abs(y1 - y2));
+		switch (shapeType) {
+		case "Draw Rectangle":
+			g.drawRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2),
+					Math.abs(y1 - y2));
+			break;
+
+		case "Fill Rectangle":
+			g.fillRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2),
+					Math.abs(y1 - y2));
+			break;
+
+		case "Draw Oval":
+			g.drawOval(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2),
+					Math.abs(y1 - y2));
+			break;
+
+		case "Fill Oval":
+			g.fillOval(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2),
+					Math.abs(y1 - y2));
+			break;
+		}
 
 	}
 
