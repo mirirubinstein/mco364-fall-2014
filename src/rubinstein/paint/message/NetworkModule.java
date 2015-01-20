@@ -1,4 +1,4 @@
-package rubinstein.paint;
+package rubinstein.paint.message;
 
 import rubinstein.paint.message.PaintMessage;
 

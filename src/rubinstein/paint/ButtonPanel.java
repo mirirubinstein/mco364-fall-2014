@@ -55,36 +55,31 @@ public class ButtonPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == clearScreenButton) {
-			//canvas.setNewImage();
-			//canvas.setPreview(false);
+			// canvas.setNewImage();
+			// canvas.setPreview(false);
 			ClearMessage message = new ClearMessage();
-			try {
-				client.sendMessage(message.toString());
-			} catch (IOException ex) {
-				// TODO Auto-generated catch block
-				ex.printStackTrace();
-			}
+			canvas.getModule().sendMessage(message);
 		} else {
 			canvas.setPreview(true);
 			if (e.getSource() == pencilButton) {
 				listener = new PencilListener(canvas);
 
 			} else if (e.getSource() == rectButton) {
-				listener = new RectListener(canvas);
+				listener = new ShapeListener(canvas, "Draw Rectangle");
 
 			} else if (e.getSource() == fillRectButton) {
-				listener = new FillRectListener(canvas);
+				listener = new ShapeListener(canvas, "Fill Rectangle");
 
 			} else if (e.getSource() == ovalButton) {
-				listener = new OvalListener(canvas);
+				listener = new ShapeListener(canvas, "Draw Oval");
 
 			} else if (e.getSource() == fillOvalButton) {
-				listener = new FillOvalListener(canvas);
+				listener = new ShapeListener(canvas, "Fill Oval");
 
-			}else if (e.getSource() == bucketFillButton) {
+			} else if (e.getSource() == bucketFillButton) {
 				listener = new BucketFillListener(canvas);
 			}
-			
+
 			canvas.addListener(listener);
 		}
 	}

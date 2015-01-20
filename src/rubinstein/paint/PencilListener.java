@@ -85,16 +85,9 @@ public class PencilListener implements DrawListener{
 
 	@Override
 	public void drawPreview(Graphics2D g) {
-		//g.setStroke(new BasicStroke(canvas.getStrokeThickness(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-		//g.setColor(canvas.getColor());
-		//g.drawLine(oldX, oldY, currentX, currentY);
+		
 		PencilMessage message = new PencilMessage(oldX, oldY, currentX, currentY, canvas.getColor().getRGB(), strokeThickness);
-		try {
-			client.sendMessage(message.toString());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		canvas.getModule().sendMessage(message);
 	}
 
 

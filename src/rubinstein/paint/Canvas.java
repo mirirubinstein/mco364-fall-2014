@@ -2,21 +2,25 @@ package rubinstein.paint;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.ConnectException;
 
 import javax.swing.JComponent;
 
 import rubinstein.paint.message.Client;
+import rubinstein.paint.message.LoopbackNetworkModule;
+import rubinstein.paint.message.NetworkModule;
+import rubinstein.paint.message.OnlineNetworkModule;
 
 public class Canvas extends JComponent {
 	private DrawListener listener;
 	private BrushPanel panel;
 	private Client client;
+	private NetworkModule module;
 	private int strokeThickness;
 	private Image image;
 	private Color paintColor;
@@ -24,8 +28,16 @@ public class Canvas extends JComponent {
 
 	public Canvas(BrushPanel panel) throws IOException {
 		this.panel = panel;
-		client = new Client(this);
+		try {
+			client = new Client(this);
+			module = new OnlineNetworkModule(client);
+		} catch (Exception e) {
+			if (e instanceof ConnectException) {
+				module = new LoopbackNetworkModule(this);
+			}
+		}
 		image = new BufferedImage(1000, 600, BufferedImage.TYPE_INT_ARGB);
+		image.getGraphics().fillRect(0, 0, 1000, 600);
 		paintColor = Color.BLACK;
 		strokeThickness = 10;
 		preview = true;
@@ -104,6 +116,9 @@ public class Canvas extends JComponent {
 		this.listener = listener;
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
+	}
+	public NetworkModule getModule(){
+		return module;
 	}
 
 }
