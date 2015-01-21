@@ -11,8 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 
-import rubinstein.paint.message.Client;
-
 
 public class Paint extends JFrame {
 	private JButton colorButton;

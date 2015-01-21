@@ -2,7 +2,6 @@ package rubinstein.paint;
 
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 
 import rubinstein.paint.message.Client;
 import rubinstein.paint.message.ShapeMessage;
@@ -10,7 +9,7 @@ import rubinstein.paint.message.ShapeMessage;
 public class ShapeListener implements DrawListener {
 
 	private Canvas canvas;
-	private int x1, y1, x2, y2;
+	private int x1, y1, x2, y2, width, height;
 	private int strokeThickness;
 	private Client client;
 	private String shapeType;
@@ -61,6 +60,7 @@ public class ShapeListener implements DrawListener {
 		x2 = e.getX();
 		y2 = e.getY();
 		// canvas.repaint();
+		drawPreview((Graphics2D) canvas.getImage().getGraphics());
 	}
 
 	@Override
@@ -70,50 +70,67 @@ public class ShapeListener implements DrawListener {
 		x2 = e.getX();
 		y2 = e.getY();
 
-		draw((Graphics2D) canvas.getImage().getGraphics());
+		width = Math.abs(x2 - x1); 
+		height = Math.abs(y2 - y1); 
+	 
+		 
+		
+
+		draw();
 		// canvas.repaint();
 
 	}
 
-	public void draw(Graphics2D g) {
-
-		// g.setStroke(new BasicStroke(canvas.getStrokeThickness(),
-		// BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-		// g.setColor(canvas.getColor());
-		// g.drawRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2),
-		// Math.abs(y1 - y2));
+	public void draw() {
 
 		ShapeMessage message = null;
 		switch (shapeType) {
 
 		case "Draw Rectangle":
-			message = new ShapeMessage("RECT", x1, x2, y1, y2, canvas
-					.getColor().getRGB(), strokeThickness, Boolean.FALSE);
+			message = new ShapeMessage("RECT", Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2),
+					Math.abs(y1 - y2), canvas.getColor().getRGB(), strokeThickness, Boolean.FALSE);
 			break;
 
 		case "Fill Rectangle":
-			message = new ShapeMessage("RECT", x1, x2, y1, y2, canvas
-					.getColor().getRGB(), strokeThickness, Boolean.TRUE);
+			message = new ShapeMessage("RECT", Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2),
+					Math.abs(y1 - y2), canvas.getColor().getRGB(), strokeThickness, Boolean.TRUE);
 			break;
 
 		case "Draw Oval":
-			message = new ShapeMessage("OVAL", x1, x2, y1, y2, canvas
-					.getColor().getRGB(), strokeThickness, Boolean.FALSE);
+			message = new ShapeMessage("OVAL", Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2),
+					Math.abs(y1 - y2), canvas.getColor().getRGB(), strokeThickness, Boolean.FALSE);
 			break;
 
 		case "Fill Oval":
-			message = new ShapeMessage("OVAL", x1, x2, y1, y2, canvas
-					.getColor().getRGB(), strokeThickness, Boolean.TRUE);
+			message = new ShapeMessage("OVAL", Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2),
+					Math.abs(y1 - y2), canvas.getColor().getRGB(), strokeThickness, Boolean.TRUE);
 			break;
 		}
 
 		canvas.getModule().sendMessage(message);
 	}
 
-	@Override
 	public void drawPreview(Graphics2D g) {
-		// TODO Auto-generated method stub
-		draw(g);
+			
+
+			switch (shapeType) {
+			case "Draw Rectangle":
+				g.drawRect( Math.min(x1, x2),  Math.min(y1, y2), width, height);
+				break;
+
+			case "Fill Rectangle":
+				g.fillRect( Math.min(x1, x2),  Math.min(y1, y2), width, height);
+				break;
+
+			case "Draw Oval":
+				g.drawOval( Math.min(x1, x2),  Math.min(y1, y2), width, height);
+				break;
+
+			case "Fill Oval":
+				g.fillOval( Math.min(x1, x2),  Math.min(y1, y2), width, height);
+				break;
+			}
+		
 
 	}
 

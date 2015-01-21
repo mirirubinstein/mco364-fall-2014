@@ -18,7 +18,6 @@ public class BucketFillListener implements DrawListener {
 
 	public BucketFillListener(Canvas canvas){
 		this.canvas = canvas;
-		// screenBuffer = new int[canvas.getWidth()][canvas.getHeight()];
 		 bufferedImage = (BufferedImage) canvas.getImage();
 		 client = canvas.getClient();
 		}
@@ -117,7 +116,7 @@ public class BucketFillListener implements DrawListener {
 	@Override
 	public void drawPreview(Graphics2D g) {
 		// TODO Auto-generated method stub
-		BucketFillMessage message = new BucketFillMessage(canvas, x, y, bufferedImage.getRGB(x,y));
+		BucketFillMessage message = new BucketFillMessage(canvas, x, y, canvas.getColor().getRGB());
 		canvas.getModule().sendMessage(message);
 		
 	}

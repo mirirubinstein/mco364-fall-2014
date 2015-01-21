@@ -7,10 +7,10 @@ import java.awt.Graphics2D;
 
 public class ShapeMessage implements PaintMessage {
 	private String type;
-	private int x1;
-	private int x2;
-	private int y1;
-	private int y2;
+	private int x;
+	private int y;
+	private int width;
+	private int height;
 	private int color;
 	private int stroke;
 	private boolean fill;
@@ -18,10 +18,10 @@ public class ShapeMessage implements PaintMessage {
 	public ShapeMessage(String type, int x, int y, int width, int height, int color, int stroke, boolean fill){
 		super();
 		this.type = type;
-		this.x1 = x;
-		this.x2 = y;
-		this.y1 = width;
-		this.y2 = height;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
 		this.color = color;
 		this.stroke = stroke;
 		this.fill = fill;
@@ -39,42 +39,42 @@ public class ShapeMessage implements PaintMessage {
 
 
 	public int getX() {
-		return x1;
+		return x;
 	}
 
 
 	public void setX(int x) {
-		this.x1 = x;
+		this.x = x;
 	}
 
 
 	public int getY() {
-		return x2;
+		return y;
 	}
 
 
 	public void setY(int y) {
-		this.x2 = y;
+		this.y = y;
 	}
 
 
 	public int getWidth() {
-		return y1;
+		return width;
 	}
 
 
 	public void setWidth(int width) {
-		this.y1 = width;
+		this.width = width;
 	}
 
 
 	public int getHeight() {
-		return y2;
+		return height;
 	}
 
 
 	public void setHeight(int height) {
-		this.y2 = height;
+		this.height = height;
 	}
 
 
@@ -111,7 +111,7 @@ public class ShapeMessage implements PaintMessage {
 
 	@Override
 	public String toString() {
-		return  "SHAPE " + type + " "  + x1 + " " + x2 + " " + y1 + " " + y2 + " " + color + " " + stroke + " " + fill + "\n" ;
+		return  "SHAPE " + type + " "  + x + " " + y + " " + width + " " + height + " " + color + " " + stroke + " " + fill + "\n" ;
 	}
 
 
@@ -124,18 +124,16 @@ public class ShapeMessage implements PaintMessage {
 		switch (type) {
 		case "RECT":
 			if (fill) {
-				g.fillRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2),
-									Math.abs(y1 - y2));
+				g.fillRect(x,y,width,height);
 			} else {
-				g.drawRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2),
-									Math.abs(y1 - y2));
+				g.drawRect(x,y,width,height);
 			}
 			break;
 		case "OVAL":
 			if (fill) {
-				g.fillOval(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2), Math.abs(y1 - y2));
+				g.fillOval(x,y,width,height);
 			} else {
-				g.drawOval(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2), Math.abs(y1 - y2));
+				g.drawOval(x,y,width,height);
 			}
 		}
 		}catch(Exception x){

@@ -56,7 +56,7 @@ public class BucketFillMessage implements PaintMessage {
 		// TODO Auto-generated method stub
 		BufferedImage bufferedImage = (BufferedImage) canvas.getImage();
         int clickedColor = bufferedImage.getRGB(x, y);
-        int newColor = canvas.getColor().getRGB();
+        int newColor = color;
 
 		floodFill4Stack(x,y, newColor, clickedColor, bufferedImage);
 
