@@ -1,6 +1,7 @@
 package rubinstein.paint.message;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class ClearMessage implements PaintMessage {
 

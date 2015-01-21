@@ -3,7 +3,6 @@ package rubinstein.paint;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 
 import rubinstein.paint.message.Client;
 import rubinstein.paint.message.PencilMessage;
@@ -32,6 +31,7 @@ public class PencilListener implements DrawListener{
 		currentY = y2;
 		
 		drawPreview((Graphics2D) canvas.getImage().getGraphics());
+		draw();
 		
 		oldX = currentX;
 		oldY= currentY;	
@@ -85,6 +85,14 @@ public class PencilListener implements DrawListener{
 
 	@Override
 	public void drawPreview(Graphics2D g) {
+		g.setStroke(new BasicStroke(canvas.getStrokeThickness(), BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+		g.setColor(canvas.getColor());
+
+		g.drawLine(oldX, oldY, currentX, currentY);
+	}
+	
+	
+	public void draw() {
 		
 		PencilMessage message = new PencilMessage(oldX, oldY, currentX, currentY, canvas.getColor().getRGB(), strokeThickness);
 		canvas.getModule().sendMessage(message);

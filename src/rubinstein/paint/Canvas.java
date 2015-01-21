@@ -47,28 +47,36 @@ public class Canvas extends JComponent {
 
 		addMouseWheelListener(new MouseWheelListener() {
 			public void mouseWheelMoved(MouseWheelEvent e) {
-
+				
 				int scrolledAmount = (-e.getWheelRotation());
 				if (-scrolledAmount >= strokeThickness) {
 					strokeThickness = 1;
 				} else {
 					strokeThickness += scrolledAmount;
-
+					
 				}
+				
 			}
+			
 		});
+	
 	}
 	
 	protected void paintComponent(Graphics g) {
 
-		g.drawImage(image, 0, 0, null);
+	//	g.drawImage(image, 0, 0, null);
 		panel.setStrokeWidth(strokeThickness);
 
 		// all the listeners will implement this method differently, depending
 		// on its shape
-		//if (preview) {
-		//	listener.drawPreview((Graphics2D) g);
-		//}
+		if(preview){
+			for (int i = 0; i < 4; i++) {
+				g.drawImage(image, 0, 0, null);
+				
+					listener.drawPreview((Graphics2D) g);
+				
+			}
+		}
 
 		preview = true;
 	}

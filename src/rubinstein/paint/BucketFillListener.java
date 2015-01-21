@@ -36,7 +36,7 @@ public class BucketFillListener implements DrawListener {
 	int imageRGB = bufferedImage.getRGB(x,y);
 	
 	//floodFill8(x,y, imageRGB, graphicsRGB);
-	drawPreview(g);
+	draw(g);
 	
 
 	}
@@ -113,13 +113,17 @@ public class BucketFillListener implements DrawListener {
 		
 	}
 
-	@Override
-	public void drawPreview(Graphics2D g) {
+	public void draw(Graphics2D g) {
 		// TODO Auto-generated method stub
 		BucketFillMessage message = new BucketFillMessage(canvas, x, y, canvas.getColor().getRGB());
 		canvas.getModule().sendMessage(message);
 		
 	}
+	@Override
+	public void drawPreview(Graphics2D g) {
+		
+	}
+	
 
 	
 	

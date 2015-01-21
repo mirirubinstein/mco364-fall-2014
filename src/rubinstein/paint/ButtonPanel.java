@@ -55,8 +55,8 @@ public class ButtonPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == clearScreenButton) {
-			// canvas.setNewImage();
-			// canvas.setPreview(false);
+			//canvas.setNewImage();
+			 canvas.setPreview(false);
 			ClearMessage message = new ClearMessage();
 			canvas.getModule().sendMessage(message);
 		} else {
